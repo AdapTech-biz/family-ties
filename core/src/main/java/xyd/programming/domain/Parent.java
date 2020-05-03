@@ -10,6 +10,7 @@ public class Parent extends FamilyMember {
     private FamilyTitle familyTitle;
     private Account account;
     private List<Child> children;
+    private Parent partner;
 
     public Parent(String name, FamilyTitle familyTitle) {
         super(name, Role.Parent);

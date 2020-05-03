@@ -1,28 +1,21 @@
 package xyd.programming.service;
 
-import org.springframework.stereotype.Component;
 import xyd.programming.domain.Child;
 import xyd.programming.domain.FamilyTitle;
 import xyd.programming.domain.Gender;
 import xyd.programming.domain.Parent;
 
-import java.util.List;
+public interface FamilyTreeService {
+    Parent createParent (String name, FamilyTitle title);
 
-@Component
-public class FamilyTreeService {
+    void createChild(String childName, Gender gender, Parent... forParents);
 
-    public Parent createParent (String name, FamilyTitle title) {
-        Parent parent = new Parent(name, title );
-        return parent;
+    void setParentPartner(Parent parent1, Parent parent2);
+
+    default void addChildToParent(Child child, Parent... parents) {
+        for (Parent parent: parents) {
+            parent.getChildren().add(child);
+        }
+
     }
-
-    public void createChild(String childName, Gender gender, Parent forParent) {
-        Child child = new Child(childName, gender, forParent);
-        addChildToParent(forParent, child);
-    }
-
-    private void addChildToParent(Parent parent, Child child) {
-        parent.getChildren().add(child);
-    }
-
 }
